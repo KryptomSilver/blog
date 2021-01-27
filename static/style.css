@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap');
+
+html {
+    min-height: 100%;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    margin: 0;
+    margin-bottom: 40px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Inicio de sesión */
+.imagen-padre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-login {
+    margin-top: -4rem;
+    width: 8rem;
+    height: 8rem;
+    padding: 0;
+}
+
+.login-label {
+    font-style: italic;
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+.padre {
+    height: 60rem;
+    /*IMPORTANTE*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formulario {
+    padding: 1rem 3rem 0 3rem;
+}
+
+.card-body {
+    width: 40rem;
+    height: 32rem;
+    border-radius: .8rem;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+#btn {
+    color: white;
+    font-size: 2rem;
+    width: 60%;
+    border-radius: .5rem;
+}
+
+.botones {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botones.cancelar {
+    padding: 0;
+}
+
+
+/* Blog  */
+.menu {
+    margin: 0;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    background-color: #5E9BF7;
+}
+
+.menu-items {
+    display: flex;
+}
+
+.menu-link {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: white;
+    height: 5rem;
+    width: 10rem;
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.menu-link:hover,
+.menu-link:active {
+    text-decoration: none;
+    background-color: #0066ff;
+    color: white;
+}
+
+.menu-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-link-login {
+    width: 10rem;
+    height: 4rem;
+    padding: 1rem 0 1rem 0;
+    font-size: 1.5rem;
+}
+
+.menu-link-logout {
+    width: 5rem;
+    height: 4rem;
+    padding: 1rem;
+    margin-left: 1rem;
+}
+
+
+.contenido {
+    padding: 5rem 15rem 0 15rem;
+}
+
+/* Footer */
+footer {
+    background-color: #5E9BF7;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer label {
+    margin: 0;
+}
+
+/* Registar Blog */
+.secciones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    background: #808080b5;
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+}
+
+.secciones h4 {
+    margin: 0;
+    color: white;
+}
+
+.botones-registrar-blog {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.botones-registrar-blog button {
+    height: 4rem;
+    width: 15rem;
+}
+
+/* Registrar Usuario */
+.card-body-usuario {
+    margin-top: 8rem;
+    z-index: 1;
+    width: 40rem;
+    height: 56rem;
+    border-radius: .8rem;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.75);
+}
+
+.alerta {
+    z-index: 2;
+
+}
+
+/* Login */
+.notificacion {
+    text-align: center;
+    z-index: 10;
+    width: 30rem;
+    height: 5rem;
+    background-color: rgba(255, 0, 0, 0.637);
+}
+/* Alert tamaño fixed */
+.swal2-popup {
+    font-size: 1.5rem !important;
+}
