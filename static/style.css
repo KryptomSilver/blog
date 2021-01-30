@@ -8,11 +8,44 @@ html {
 
 body {
     margin: 0;
-    margin-bottom: 40px;
+    margin-bottom: 2rem;
 }
 
 a {
     text-decoration: none;
+}
+
+/***** Globales ****/
+.contenedor {
+    margin-top: -56.6rem;
+    margin-left: 25rem;
+    height: 40.4em;
+    width: 81.7%;
+    max-height: 40.4rem;
+    padding: 0 4rem;
+}
+.cont{
+    display: flex;
+}
+
+.j-c-center {
+    justify-content: center;
+}
+
+.j-c-space-around {
+    justify-content: space-around;
+}
+
+.j-c-space-evenly {
+    justify-content: space-evenly;
+}
+
+.j-c-flex-end {
+    justify-content: flex-end;
+}
+
+.a-i-center {
+    align-items: center;
 }
 
 /* Inicio de sesión */
@@ -27,6 +60,7 @@ a {
     width: 8rem;
     height: 8rem;
     padding: 0;
+    border-radius: 2rem;
 }
 
 .login-label {
@@ -84,7 +118,11 @@ a {
     display: flex;
     justify-content: space-between;
     padding: 0 2rem;
-    background-color: #5E9BF7;
+    background-color: #fc942c;
+}
+
+.descripcion {
+    text-align: justify;
 }
 
 .menu-items {
@@ -104,7 +142,7 @@ a {
 .menu-link:hover,
 .menu-link:active {
     text-decoration: none;
-    background-color: #0066ff;
+    background-color: #fcb32c;
     color: white;
 }
 
@@ -115,7 +153,7 @@ a {
 }
 
 .menu-link-login {
-    width: 10rem;
+    width: 12rem;
     height: 4rem;
     padding: 1rem 0 1rem 0;
     font-size: 1.5rem;
@@ -131,15 +169,16 @@ a {
 
 .contenido {
     padding: 5rem 15rem 0 15rem;
+
 }
 
 /* Footer */
 footer {
-    background-color: #5E9BF7;
+    background-color: #fc942c;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 40px;
+    height: 4rem;
     color: white;
     display: flex;
     justify-content: center;
@@ -148,6 +187,7 @@ footer {
 
 footer label {
     margin: 0;
+    font-size: .8rem;
 }
 
 /* Registar Blog */
@@ -204,7 +244,196 @@ footer label {
     height: 5rem;
     background-color: rgba(255, 0, 0, 0.637);
 }
+
 /* Alert tamaño fixed */
 .swal2-popup {
     font-size: 1.5rem !important;
+}
+
+
+/* Botones */
+.mybtn {
+    background-color: #1468ff;
+    border-color: #1468ff;
+    color: white;
+}
+
+.mybtn:hover {
+    background-color: #1466ffc4;
+    border-color: #1466ffc4;
+    color: white;
+}
+
+.mybtn:active {
+    background-color: #1466ffc4;
+    border-color: #1466ffc4;
+    color: white;
+}
+
+.mybtn:focus {
+    background-color: #1466ffc4;
+    border-color: #1466ffc4;
+    color: white;
+}
+
+/** Tabla **/
+table.dataTable thead th,
+table.dataTable thead td {
+    border-bottom: none;
+}
+
+table.dataTable tfoot th,
+table.dataTable tfoot td {
+    border-top: none;
+}
+
+.acciones-botones {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.button {
+    width: 10rem;
+}
+
+/******** Menu2 *******/
+.barra {
+    margin: 0;
+    width: 100%;
+    height: 6.5rem;
+    padding: 0;
+    background-color: #fc942c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-alt {
+    background-color: #0a2b60;
+    height: 40.4em;
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 1rem 0 0 0;
+    justify-content: space-between;
+}
+
+.imagen {
+    width: 6.5rem;
+}
+
+.item {
+    color: white;
+    text-decoration: none;
+    background-color: #143c7b;
+    height: 3rem;
+    width: 18rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5rem;
+}
+.item:hover{
+    background-color: #143b7bb9;
+    color: white;
+    text-decoration: none;
+}
+.item:active{
+    background-color: #143b7bb9;
+    color: white;
+    text-decoration: none;
+}
+
+
+.item:first-child {
+    margin-top: 1rem;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #143c7b;
+    color: white;
+    height: 3rem;
+    width: 14rem;
+    padding: 0 .2rem;
+    border-radius: .4rem;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.login:hover{
+    background-color: #143b7bb9;
+    color: white;
+    text-decoration: none;
+}
+.login:active{
+    background-color: #143b7bb9;
+    color: white;
+    text-decoration: none;
+}
+.login-a{
+    background-color: #143c7b;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+.login-a:active{
+    background-color: #143b7bb9;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+.login-a:hover{
+    background-color: #143b7bb9;
+    color: white;
+    text-decoration: none;
+    border: none;
+}
+.login label {
+    margin: 0;
+}
+
+.texto-boton {
+    padding-left: 1rem;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+}
+
+.titulo h1 {
+    color: white;
+    margin: 0;
+    font-size: 3rem;
+}
+
+.cerrar {
+    color: white;
+    background-color: #ff0000cf;
+    height: 3rem;
+    width: 12rem;
+    padding: 0 .2rem;
+    border-radius: .3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -8rem;
+    text-decoration: none;
+}
+.cerrar:hover{
+    color: white;
+    background-color: #ff00005b;
+    text-decoration: none;
+}
+.cerrar:active{
+    color: white;
+    background-color: #ff00005b;
+    text-decoration: none;
 }

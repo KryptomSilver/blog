@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Blog
+{% endblock %}
+{% block content %}
+{% block body %}
+
+{% include 'menu.html' %}
+<div class="contenedor">
+    <div class="contenido">
+        <h1>{{ variable.titulo }}</h1>
+        <p class="descripcion">{{ variable.descripcion }}</p>
+        <div class="cont j-c-flex-end a-i-center">
+            <a href="{{url_for('myposts')}}" class="btn mybtn">Regresar</a>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+{% endblock %}

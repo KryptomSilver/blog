@@ -8,7 +8,21 @@ Blog
 {% block body %}
 
 {% include 'menu.html' %}
-<div class="contenido">
+
+<div class="contenedor">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% if messages[0] == "Post Registrado" %}
+            <script>
+                alert_success('{{ messages[0] }}')
+            </script>
+        {% else %}
+            <script>
+                alert_warning('{{ messages[0] }}')
+            </script>
+        {% endif %}
+    {% endif %}
+    {% endwith %}
     <form method="POST" class="formulario-blog">
         <div class="row">
             <h1 class="text-center">Registrar Post</h1>
@@ -26,31 +40,13 @@ Blog
             </div>
         </div>
         <div class="row">
-            <div class="secciones">
-                <h4>Secciones</h4>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="seccion-1">Seccion 1:</label>
-                    <textarea  id="" name="seccion1"cols="20" maxlength="800"rows="10" class="form-control" id="seccion-1"></textarea>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="seccion-2">Seccion 1:</label>
-                    <textarea  id="" name="seccion2" maxlength="800"cols="20" rows="10" class="form-control" id="seccion-2"></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="row">
             <div class="botones-registrar-blog">
-                <input class="btn btn-primary" type="submit" value="Guardar">
+                <input class="btn mybtn" type="submit" value="Guardar">
             </div>
         </div>
     </form>
 </div>
-{% block foter %}
-{% include 'footer.html' %}
-{% endblock %}
+
+
 {% endblock %}
 {% endblock %}

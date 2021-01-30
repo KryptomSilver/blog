@@ -8,12 +8,10 @@ Index
 {% block body %}
 <style>
     body{
-        background-color:  rgba(0, 225, 255, 0.48);
+        background-color:  #0a2b60;
     }
 </style>
-<link rel="shortcut icon" href="{{url_for('static',filename='logo.ico')}}" type="image/x-icon">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.13.3/sweetalert2.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.13.3/sweetalert2.css">
 <script src="{{url_for('.static', filename='alerts.js')}}"></script>
 <div class="container">
     <div class="padre">
@@ -27,21 +25,21 @@ Index
         <div class="card">
             <div class="card-body">
                 <div class="imagen-padre">
-                    <img class="imagen-login" src="{{url_for('static',filename='logo-login.png')}}">
+                    <img class="imagen-login" src="{{url_for('static',filename='logo.png')}}">
                 </div>
                 <!--<h2 class="titulo text-center">Blog Escolar</h2>-->
                 <form action="" method="POST" class="formulario">
                     <div class="form-group">
                         <label class="login-label" for="">Correo:</label>
-                        <input type="email" name="correo" class="form-control">
+                        <input type="email" name="correo" placeholder="Correo" class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="login-label" for="">Contraseña:</label>
-                        <input type="password" name="password"class="form-control">
+                        <input type="password" placeholder="************" name="password"class="form-control">
                     </div>
                     
                     <div class="form-group botones">
-                        <input class="btn btn-md btn-primary" id="btn"type="submit" value="Iniciar">
+                        <input class="login-a" id="btn"type="submit" value="Iniciar">
                     </div>
                     
                     <div class="form-group botones cancelar">

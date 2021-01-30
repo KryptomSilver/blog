@@ -3,24 +3,45 @@
 {% block title %}
 Blog
 {% endblock %}
-{% block content %}
+
 {% block body %}
-<link rel="shortcut icon" href="{{url_for('static',filename='logo.ico')}}" type="image/x-icon">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.13.3/sweetalert2.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.13.3/sweetalert2.css">
-<script src="{{url_for('.static', filename='alerts.js')}}"></script>
 {% include 'menu.html' %}
+<div class="contenedor">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% if messages[0] == "Post Registrado" %}
+    <script>
+        alert_success('{{ messages[0] }}')
+    </script>
+    {% else %}
+    <script>
+        alert_warning('{{ messages[0] }}')
+    </script>
+    {% endif %}
+    {% endif %}
+    {% endwith %}
     <div class="contenido">
+        {% if current_user.is_authenticated %}
+        <div class="cont j-c-flex-end a-i-center">
+            <div class="form-group">
+                <a class="btn mybtn btn-md crear" href="{{url_for("post_registrar")}}">Crear Post</a>
+            </div>
+        </div>
+        {% else %}
+
+        {% endif %}
+
         {% for result in variable %}
-            <h1>{{ result.titulo }}</h1>
-            <h4>Autor:Abel Romero Ruiz</h4>
-            <p>{{ result.descripcion }}</p>
+        <h1>{{ result[4] }}</h1>
+        <h4>Autor: <a href="/profile/{{ result[1] }}">{{ result[3] }}</a> </h4>
+        <p class="descripcion">{{ result[5] }}</p>
         {% endfor %}
     </div>
-    
+
+</div>
 
 {% block footer %}
 {% include 'footer.html' %}
 {% endblock %}
-{% endblock %}
+
 {% endblock %}

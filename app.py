@@ -3,6 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required,Lo
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+import time
 app = Flask(__name__)
 app.debug=True
 Bootstrap(app)
@@ -36,22 +37,94 @@ class Usuario(db.Model):
         return str(self.id)
 
 class Posts(db.Model):
-    Id_Post = db.Column(db.Integer,primary_key=True)
-    titulo = db.Column(db.String(30)) 
-    descripcion = db.Column(db.String(30)) 
-    seccion1 = db.Column(db.String(30)) 
-    seccion2 = db.Column(db.String(30))
-
-@app.route('/')
-@login_required
-def index():
-    datos = Posts.query.all()
-    return render_template('index.html',variable=datos)
+    id = db.Column(db.Integer,primary_key=True,index=True)
+    titulo = db.Column(db.String(255), index=True) 
+    descripcion = db.Column(db.String(800)) 
+    id_usuario =  db.Column(db.Integer, db.ForeignKey('usuario.id'))
 @login_manager.user_loader
 def load_user(user_id):
         # since the user_id is just the primary key of our user table, use it in the query for the user
         return Usuario.query.get(int(user_id))
+@app.route('/menu')
+def menu():
+    return render_template('menu2.html')
 
+'-----------------------------------------------------------My Posts-----------------------------------------------------------'
+@app.route('/myposts')
+@login_required
+def myposts():
+    datos =  Usuario.query\
+    .join(Posts, Usuario.id==Posts.id_usuario)\
+    .add_columns(Usuario.id, Usuario.nombre, Usuario.email, Posts.titulo,Posts.descripcion,Posts.id)\
+    .filter(Usuario.id == current_user.id).all()
+    #print(datos)
+    return render_template('my-posts.html',variable=datos)
+'-----------------------------------------------------------Post Ver-----------------------------------------------------------'
+@app.route('/post/<id_post>')
+@login_required
+def post_ver(id_post):
+    datos = Posts.query.filter_by(id=int(id_post)).first()
+    print(datos)
+    return render_template('post.html',variable=datos)
+'-----------------------------------------------------------Post Editar-----------------------------------------------------------'
+@app.route('/post-editar/<id_post>')
+@login_required
+def post_editar(id_post):
+    datos = Posts.query.filter_by(id=int(id_post)).first()
+    print(datos)
+    return render_template('post-editar.html',variable=datos)
+
+@app.route('/post-actualizar',methods=['GET','POST'])
+@login_required
+def post_actualizar():
+    if request.method == "POST":
+        consulta = Posts.query.get(request.form['id'])
+        consulta.titulo = request.form['titulo']
+        consulta.descripcion = request.form['descripcion']
+        consulta.id_usuario = current_user.id
+        db.session.commit()
+        flash("Post Actualizado")
+        return redirect(url_for("myposts"))
+'-----------------------------------------------------------Post Eliminar-----------------------------------------------------------'
+@app.route('/eliminar/<post_id>')
+@login_required
+def post_eliminar(post_id): 
+    consulta = Posts.query.filter_by(id=int(post_id)).delete()
+    db.session.commit()
+    flash("Post Eliminado")
+    return redirect(url_for("myposts"))
+'-----------------------------------------------------------Index-----------------------------------------------------------'
+@app.route('/')
+def index(): 
+    datos =  Usuario.query\
+    .join(Posts, Usuario.id==Posts.id_usuario)\
+    .add_columns(Usuario.id, Usuario.nombre, Usuario.email, Posts.titulo,Posts.descripcion).all()
+    #print(datos)
+    return render_template('index.html',variable=datos)
+'-----------------------------------------------------------Registrar Post-----------------------------------------------------------'
+@app.route('/post-registrar', methods=['GET','POST'])
+@login_required
+def post_registrar():
+    if request.method == "POST":
+        vtitulo = request.form['titulo']
+        vdescripcion = request.form['descripcion']
+        post = Posts.query.filter_by(titulo=vtitulo).first()
+        if post:
+            flash('Post Existente')
+            return redirect(url_for("post_registrar"))
+            print(post)
+        else:
+            post = Posts(
+            titulo=vtitulo,
+            descripcion=vdescripcion,
+            id_usuario=current_user.id
+            )
+            db.session.add(post)
+            db.session.commit()
+            flash('Post Registrado')
+            return redirect(url_for("index"))
+    return render_template('post-registrar.html')
+'-----------------------------------------------------------Login-----------------------------------------------------------'
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == "POST":
@@ -72,13 +145,21 @@ def login():
         else:
             flash('Ingresa valores!!')
     return render_template('login.html')
+
+'-----------------------------------------------------------Cerrar sesión-----------------------------------------------------------'
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for("login"))
-   
 
+'-----------------------------------------------------------Perfil-----------------------------------------------------------'
+@app.route("/profile/<id_usuario>")
+def profile(id_usuario):
+    datos = Usuario.query.filter_by(id=int(id_usuario)).first()
+    return render_template("profile.html",variable=datos)
+
+'-----------------------------------------------------------Usuario registrar-----------------------------------------------------------'
 @app.route("/usuario-registrar",methods=['GET','POST'])
 def usuario_registrar():
     if request.method == "POST":
@@ -108,8 +189,7 @@ def usuario_registrar():
         db.session.commit()
         flash('Usuario Registrado')
         return redirect(url_for('usuario_registrar'))
-
-    return render_template('usuario-registrar.html')
+    return render_template('signup.html')
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)

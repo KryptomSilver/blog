@@ -27,3 +27,19 @@ function alert_info(msg) {
         timer: 800
     })
 }
+
+function alert_question(id) {
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "¡Tu no puedes revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminalo!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "/eliminar/"+id;
+        }
+    })
+}

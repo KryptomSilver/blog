@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Blog
+{% endblock %}
+{% block content %}
+{% block body %}
+
+{% include 'menu.html' %}
+<div class="contenedor">
+    <div class="contenido">
+        <form method="POST" action="{{url_for('post_actualizar')}}" class="formulario-blog">
+            <div class="row">
+                <h1 class="text-center">Editar Post</h1>
+                <input type="hidden" value="{{variable.id}}" name="id" name="id">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="titulo-blog">Titulo del Post:</label>
+                        <input type="text" name="titulo" class="form-control" value="{{variable.titulo}}"
+                            id="titulo-blog" required>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+
+                        <label for="descrip-blog">Descripción del Post:</label>
+                        <textarea id="" name="descripcion" cols="20" maxlength="800" rows="10" class="form-control"
+                            id="descrip-blog" required>{{variable.descripcion}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="botones-registrar-blog">
+                    <input class="btn mybtn" type="submit" value="Editar">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+{% endblock %}

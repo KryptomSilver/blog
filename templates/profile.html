@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Blog
+{% endblock %}
+{% block content %}
+{% block body %}
+{% include 'menu.html' %}
+<div class="contenedor">
+    <h1 class="text-center">Perfil</h1>
+        
+    <div class="form-group">
+        <label for="">Nombre</label>
+        <input type="text"class="form-control" value="{{ variable.nombre }}" name="nombre" disabled>
+    </div>
+    <div class="form-group">
+        <label for="">Apellido Paterno</label>
+        <input type="text" class="form-control" value="{{ variable.apellido1 }}" name="nombre"disabled>
+    </div>
+    <div class="form-group">
+        <label for="">Apellido Materno</label>
+        <input type="text"class="form-control"value="{{ variable.apellido2 }}" name="nombre" disabled>
+    </div>
+    <div class="form-group">
+        <label for="">Correo</label>
+        <input type="email"class="form-control" value="{{ variable.email }}"name="nombre" disabled>
+    </div>
+    {% if current_user.id == variable.id %}
+        <div class="form-group">
+            <label for="">Contraseña</label>
+            <input type="password"class="form-control" value="{{ variable.password }}"name="nombre" disabled>
+        </div>
+    {% endif %}
+    <div class="form-group">
+        <button class=" btn btn-md mybtn">Regresar</button>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+{% endblock %}
