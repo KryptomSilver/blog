@@ -61,10 +61,6 @@ class Posts(db.Model):
 def load_user(user_id):
         # since the user_id is just the primary key of our user table, use it in the query for the user
         return Usuario.query.get(int(user_id))
-@app.route('/menu')
-def menu():
-    return render_template('menu2.html')
-
 '----------------------------------------------------------- My Posts -----------------------------------------------------------'
 @app.route('/myposts')
 @login_required
