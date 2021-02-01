@@ -3,6 +3,11 @@ from flask_login import login_user, current_user, logout_user, login_required,Lo
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+import os
+# Modulo para correo electrónico
+from flask_mail import Mail
+from flask_mail import Message
+
 import time
 app = Flask(__name__)
 app.debug=True
@@ -12,10 +17,21 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:1234@localhost:5432/blog'
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:PhantomSystem763@localhost:5432/blog'
 #app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:1234@localhost:5432/blog'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db = SQLAlchemy(app)
+
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'kryptomsilver@gmail.com'
+app.config['MAIL_PASSWORD'] = '5068616E746F6C'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
+
 class Usuario(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     nombre = db.Column(db.String(250)) 
@@ -119,6 +135,9 @@ def post_registrar():
             descripcion=vdescripcion,
             id_usuario=current_user.id
             )
+            msg = Message("Registro de Post",sender="kryptomsilver@gmail.com",recipients=['abelromeror763@gmail.com'])
+            msg.html = "<h1>" + vtitulo + "</h1>" + "<br>" + "<p>"+ vdescripcion + "</p>"
+            mail.send(msg)
             db.session.add(post)
             db.session.commit()
             flash('Post Registrado')
@@ -127,6 +146,7 @@ def post_registrar():
 '-----------------------------------------------------------Login-----------------------------------------------------------'
 @app.route('/login', methods=['GET','POST'])
 def login():
+    
     if request.method == "POST":
         vemail = request.form['correo']
         vpassword = request.form['password']
@@ -151,6 +171,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    
     return redirect(url_for("login"))
 
 '-----------------------------------------------------------Perfil-----------------------------------------------------------'
@@ -167,13 +188,8 @@ def usuario_registrar():
         vapellido1 = request.form['apellido1']
         vapellido2 = request.form['apellido2']
         vpassword = request.form['password']
-        vemail = request.form['correo']
-        print("vnombre:", vnombre)
-        print("vapellido1:", vapellido1)
-        print("vapellido2:", vapellido2)
-        print("vpassword:", vpassword)
-        print("vemail:", vemail)
-        user = Usuario.query.filter_by(email=vemail).first() 
+        correo = request.form['correo']
+        user = Usuario.query.filter_by(email=correo).first() 
         if user:
             flash('Correo existente')
             return redirect(url_for('usuario_registrar'))
@@ -183,7 +199,7 @@ def usuario_registrar():
             apellido1=vapellido1,
             apellido2=vapellido2,
             password=pw_hash,
-            email=vemail
+            email=correo
             )
         db.session.add(usuario)
         db.session.commit()
