@@ -17,7 +17,7 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:PhantomSystem763@localhost:5432/blog'
+app.config['SQLALCHEMY_DATABASE_URI']='postgres://ywgqkpgjcotosl:157a6bfef189382f11f9fdce2c70075d62cfa419882763af78e507c60cb2fabe@ec2-54-196-1-212.compute-1.amazonaws.com:5432/d28g0vq4ef4ovn'
 #app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://postgres:1234@localhost:5432/blog'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db = SQLAlchemy(app)
